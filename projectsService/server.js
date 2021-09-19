@@ -4,6 +4,7 @@ const config = require('./db/dbConfig')
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 dotenv.config()
+const projectRouter = require('./routes/project.router')
 
 const app = express();
 const PORT = process.env.PORT;
@@ -20,6 +21,8 @@ mssql.connect(config).then(pool => {
         console.log('Server connecte to mssql database...');
     }
 })
+
+app.use('/api/projects', projectRouter )
 
 app.listen(PORT, () => {
     console.log(`App running from port ${PORT}`);
