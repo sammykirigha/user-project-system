@@ -1,5 +1,7 @@
-const pool = require('../db/dbConnections')
+// const pool = require('../db/dbConnections')
 const mssql = require('mssql');
+const config = require('../db/dbCongif')
+const pool = mssql.connect(config)
 
 class UserModel {
 
@@ -14,6 +16,7 @@ class UserModel {
     findOne = async (param) => {
         const sql = `SELECT * FROM ${this.tableName} WHERE id = ${param}`
         const results = await (await pool).request().query(sql);
+        // console.log('result<<<<>>>', results);
         return results.recordsets[0][0]
     }
 
@@ -30,7 +33,7 @@ class UserModel {
             .input('first_name', mssql.VarChar(50), user.first_name)
             .input('last_name', mssql.VarChar(50), user.last_name)
             .input('email', mssql.VarChar(100), user.email)
-            .execute('uspInsertUsers')
+            .execute('uspInsertInToUsers')
         return results.recordsets
     }
 
@@ -41,7 +44,7 @@ class UserModel {
             .input('first_name', mssql.VarChar(50), user.first_name)
             .input('last_name', mssql.VarChar(50), user.last_name)
             .input('email', mssql.VarChar(100), user.email)
-            .execute('uspUpdateUsers')
+            .execute('uspUpdateInToUsers')
         return results.recordsets
     }
 
