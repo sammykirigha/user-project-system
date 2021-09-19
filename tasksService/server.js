@@ -2,6 +2,7 @@ const express = require('express');
 const config = require('./db/dbConfig');
 const mssql = require('mssql');
 const bodyParser = require('body-parser');
+const taskRouter = require('./routes/tasks.router') 
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -21,6 +22,8 @@ mssql.connect(config).then(pool => {
         console.log('server connected to my sql server databse.....');
     }
 })
+
+app.use('/api/tasks', taskRouter)
 
 app.listen(PORT, () => {
     console.log(`app running on port: ${PORT}`);
