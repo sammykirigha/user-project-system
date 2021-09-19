@@ -1,0 +1,18 @@
+function errorMiddleware(error, req, res, next) {
+    let { status = 500, message, data } = error
+    
+    console.log(`[Error] ${error}`);
+
+    message = status === 500 || !message ? 'Internal service error occured' : message;
+
+    error = {
+        type: 'error',
+        status,
+        message,
+        ...error(data) && data
+    }
+
+    res.status(status).send(error)
+}
+
+module.exports = errorMiddleware
