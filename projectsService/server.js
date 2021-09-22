@@ -22,7 +22,7 @@ mssql.connect(config).then(pool => {
     }
 })
 
-app.use('/api/projects', projectRouter )
+app.use('/api/v3/projects', projectRouter )
 
 app.listen(PORT, () => {
     console.log(`App running from port ${PORT}`);

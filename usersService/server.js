@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser')
 const mssql = require('mssql');
 const config = require('./db/dbCongif')
@@ -9,6 +10,7 @@ dotenv.config();
 const app = express();
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json())
+app.use(cors())
 
 const PORT = process.env.PORT || 3000
 
@@ -22,7 +24,7 @@ mssql.connect(config).then(pool => {
     }
 })
 
-app.use('/api/users', userRouter)
+app.use('/api/v3/users', userRouter)
 
 app.listen(PORT, () => {
     console.log(`App running from port: ${PORT}`);

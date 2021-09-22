@@ -30,8 +30,6 @@ class UserModel {
         let results = await (await pool).request()
             .input('username', mssql.VarChar(50), user.username)
             .input('password', mssql.Char(100), user.password)
-            .input('first_name', mssql.VarChar(50), user.first_name)
-            .input('last_name', mssql.VarChar(50), user.last_name)
             .input('email', mssql.VarChar(100), user.email)
             .execute('uspInsertInToUsers')
         return results.recordsets
@@ -41,8 +39,6 @@ class UserModel {
         let results = await (await pool).request()
             .input('id', mssql.Int, id)
             .input('username', mssql.VarChar(50), user.username)
-            .input('first_name', mssql.VarChar(50), user.first_name)
-            .input('last_name', mssql.VarChar(50), user.last_name)
             .input('email', mssql.VarChar(100), user.email)
             .execute('uspUpdateInToUsers')
         return results.recordsets

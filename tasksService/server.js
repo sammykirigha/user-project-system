@@ -23,7 +23,7 @@ mssql.connect(config).then(pool => {
     }
 })
 
-app.use('/api/tasks', taskRouter)
+app.use('/api/v3/tasks', taskRouter)
 
 app.listen(PORT, () => {
     console.log(`app running on port: ${PORT}`);
